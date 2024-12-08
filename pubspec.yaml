@@ -1,0 +1,64 @@
+name: medmanage3
+description: "A new Flutter project."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  cupertino_icons: ^1.0.8
+  image_picker: ^1.1.2
+  icons_plus: ^5.0.0
+  firebase_auth: ^5.3.4
+  firebase_core: ^3.8.1
+  google_fonts: ^6.2.1
+  font_awesome_flutter: ^10.5.0
+  rounded_loading_button: ^2.1.0
+  responsive_sizer: ^3.1.1
+  smooth_page_indicator: ^1.1.0
+  page_transition: "^2.0.9"
+  flutter_chat_ui: ^1.6.9
+  permission_handler: ^11.3.1
+  animated_bottom_navigation_bar: ^1.2.0
+  flutter_local_notifications: ^18.0.1
+  geolocator: ^13.0.2
+  google_maps_flutter: ^2.2.1
+  http: ^1.2.2
+  audioplayers: ^6.1.0
+  settings_ui: ^2.0.2
+  shared_preferences: ^2.0.15
+  timezone: ^0.10.0 # Make sure this version is compatible with your Flutter version
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  velocity_x: ^4.2.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/icons/bell.png
+    - lib/icons/
+    - assets/reminder.png
+    - assets/medicine.png
+    - assets/abnormal.png
+    - assets/hospital.png
+    - assets/ambulance.png
+    - assets/doctor1.png
+    - assets/slide1.png
+    - assets/slide2.png
+    - assets/slide3.png
+    - assets/surgeon.png
+    - assets/podiatrist.png
+    - assets/health.png
+    - assets/infectious.png
+    - assets/dentist.png
+    - assets/doctor.png
+    - assets/sign.png
+    - assets/ring.mp3

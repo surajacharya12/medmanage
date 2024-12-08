@@ -1,0 +1,40 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+class MessageManager {
+  static Future<void> schedulePeriodicMessages(
+      DateTime alarmTime, String message) async {
+    final FlutterLocalNotificationsPlugin _notificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    await _notificationsPlugin.initialize(initializationSettings);
+
+    DateTime firstMessageTime = alarmTime.subtract(Duration(minutes: 30));
+
+    for (int i = 0; i < 3; i++) {
+      DateTime scheduledTime = firstMessageTime.add(Duration(minutes: i * 10));
+
+      await _notificationsPlugin.schedule(
+        i + 1,
+        'Reminder',
+        '$message (${30 - (i * 10)} minutes left)',
+        scheduledTime,
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'reminder_channel',
+            'Medicine Reminders',
+            channelDescription: 'Channel for Medicine Reminders',
+            importance: Importance.max,
+            priority: Priority.high,
+          ),
+        ),
+      );
+    }
+  }
+}
+

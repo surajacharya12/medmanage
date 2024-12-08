@@ -1,0 +1,64 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz_data;
+
+class AlarmManager {
+  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  static Future<void> initialize() async {
+    tz_data.initializeTimeZones();
+    final String timeZoneName = DateTime.now().timeZoneName;
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    await _notificationsPlugin.initialize(initializationSettings);
+  }
+
+  static Future<void> scheduleRecurringAlarm(
+      DateTime scheduledTime, String message, List<int> daysOfWeek) async {
+    for (var day in daysOfWeek) {
+      final tz.TZDateTime firstOccurrence = _nextInstanceOfDay(
+        scheduledTime,
+        day,
+      );
+
+      await _notificationsPlugin.zonedSchedule(
+        day,
+        'Medicine Reminder',
+        message,
+        firstOccurrence,
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'reminder_channel',
+            'Medicine Reminders',
+            channelDescription: 'Channel for Medicine Reminders',
+            importance: Importance.max,
+            priority: Priority.high,
+            sound: RawResourceAndroidNotificationSound('ringtone'),
+          ),
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+      );
+    }
+  }
+
+  static tz.TZDateTime _nextInstanceOfDay(DateTime time, int weekday) {
+    tz.TZDateTime scheduledDate = tz.TZDateTime.from(time, tz.local);
+
+    while (scheduledDate.weekday != weekday) {
+      scheduledDate = scheduledDate.add(Duration(days: 1));
+    }
+
+    return scheduledDate;
+  }
+}
+
