@@ -12,6 +12,8 @@ class _SlideshowBannerState extends State<SlideshowBanner> {
     'assets/slide/slide1.png',
     'assets/slide/slide2.png',
     'assets/slide/slide3.png',
+    'assets/slide/slide4.png',
+    'assets/slide/slide5.png',
   ];
 
   @override
