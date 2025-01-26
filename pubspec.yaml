@@ -32,7 +32,9 @@ dependencies:
   audioplayers: ^6.1.0
   settings_ui: ^2.0.2
   shared_preferences: ^2.0.15
-  timezone: ^0.10.0 # Make sure this version is compatible with your Flutter version
+  google_generative_ai: ^0.4.6
+  timezone: ^0.10.0
+  marquee: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -44,21 +46,22 @@ flutter:
   uses-material-design: true
   assets:
     - lib/icons/bell.png
-    - lib/icons/
-    - assets/reminder.png
-    - assets/medicine.png
-    - assets/abnormal.png
-    - assets/hospital.png
-    - assets/ambulance.png
+    - assets/icon/reminder.png
+    - assets/icon/medicine.png
+    - assets/icon/abnormal.png
+    - assets/icon/hospital.png
+    - assets/icon/ambulance.png
     - assets/doctor1.png
-    - assets/slide1.png
-    - assets/slide2.png
-    - assets/slide3.png
+    - assets/slide/slide1.png
+    - assets/slide/slide2.png
+    - assets/slide/slide3.png
     - assets/surgeon.png
     - assets/podiatrist.png
     - assets/health.png
     - assets/infectious.png
-    - assets/dentist.png
     - assets/doctor.png
-    - assets/sign.png
+    - assets/icon/sign.png
     - assets/ring.mp3
+    - assets/icon/chatbot.png
+    - assets/dentist.png
+    - assets/arrow_back.png

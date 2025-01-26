@@ -9,9 +9,9 @@ class _SlideshowBannerState extends State<SlideshowBanner> {
   PageController _pageController = PageController();
   int _currentIndex = 0;
   final List<String> _imagePaths = [
-    'assets/slide1.png',
-    'assets/slide2.png',
-    'assets/slide3.png',
+    'assets/slide/slide1.png',
+    'assets/slide/slide2.png',
+    'assets/slide/slide3.png',
   ];
 
   @override
