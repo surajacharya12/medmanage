@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:medmanage3/api/api.dart';
 
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});
@@ -18,10 +19,10 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   void initState() {
     super.initState();
 
-    const apiKey = 'AIzaSyAysXFINQkr8oqWZXtaFDRVDtceXdEMuD8';
+    final apiKeyValue = apiKey();
     _model = GenerativeModel(
       model: 'gemini-2.0-flash-exp',
-      apiKey: apiKey,
+      apiKey: apiKeyValue,
       generationConfig: GenerationConfig(
         temperature: 1,
         topK: 40,
@@ -47,13 +48,17 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       final response = await _chatSession.sendMessage(content);
 
       setState(() {
-        _messages
-            .add({'sender': 'bot', 'text': response.text ?? 'No response'});
+        _messages.add({
+          'sender': 'bot',
+          'text': response.text ?? 'No response received from the bot.',
+        });
       });
     } catch (e) {
       setState(() {
-        _messages
-            .add({'sender': 'bot', 'text': 'Error: Unable to fetch response'});
+        _messages.add({
+          'sender': 'bot',
+          'text': 'Error: Unable to fetch a response. Please try again.',
+        });
       });
     }
   }
@@ -94,7 +99,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                         : MainAxisAlignment.start,
                     children: [
                       if (!isUser)
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 24,
                           backgroundImage:
                               AssetImage('assets/icon/chatbot.png'),
@@ -106,12 +111,14 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                           decoration: BoxDecoration(
                             color: isUser ? Colors.lightBlue : Colors.grey[200],
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12),
-                              bottomLeft:
-                                  isUser ? Radius.circular(12) : Radius.zero,
-                              bottomRight:
-                                  isUser ? Radius.zero : Radius.circular(12),
+                              topLeft: const Radius.circular(12),
+                              topRight: const Radius.circular(12),
+                              bottomLeft: isUser
+                                  ? const Radius.circular(12)
+                                  : Radius.zero,
+                              bottomRight: isUser
+                                  ? Radius.zero
+                                  : const Radius.circular(12),
                             ),
                           ),
                           child: Text(
@@ -155,6 +162,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                       filled: true,
                       fillColor: Colors.white,
                     ),
+                    onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
                 const SizedBox(width: 8),

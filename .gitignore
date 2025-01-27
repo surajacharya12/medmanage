@@ -43,3 +43,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Ignore api.dart to protect sensitive data
+lib/api/api.dart

@@ -35,6 +35,7 @@ dependencies:
   google_generative_ai: ^0.4.6
   timezone: ^0.10.0
   marquee: ^2.1.1
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
