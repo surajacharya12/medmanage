@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:medmanage3/api/api.dart';
 
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});
@@ -19,7 +18,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   void initState() {
     super.initState();
 
-    final apiKeyValue = apiKey();
+    final apiKeyValue = 'AIzaSyCOEjEAsk-DEDvBBO9fz0sQnJ6DOR9DJ8M';
     _model = GenerativeModel(
       model: 'gemini-2.0-flash-exp',
       apiKey: apiKeyValue,
